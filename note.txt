@@ -1,0 +1,37 @@
+frameRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) 
+frame that read from camera, through OpenCV, are saved in BGR color -> so we have to convert it to RGB
+
+- Ghi nhận thông số khung xương: ghi vào 1 cái list -> truyền vào file csv
+- results: chứa tọa độ của các điểm trên khung xương
+
+# sudo apt-get install libgtk2.0-dev pkg-config -> use for ubuntu
+
+- ghép 10 frame liên tiếp để nhận diện hành vi con người
+- timestep : số bước trong 1 cái input
+- input_dim
+- batch_size: đưa nhiều input vào 1 lần
+
+model = Sequential() # Stacked LSTM
+// model.add(LSTM(units=128, return_sequences=True, input_shape=(X_train.shape[1], X_train.shape[2])))
+model.add(LSTM(units=128, input_shape=(no_of_timesteps, X_train.shape[2])))
+
+
+- Kiến trúc của mạng LSTM từ đâu mà có? -> Tự do design, qua thực nghiệm thì điều chỉnh lại cho phù hợp.
+- shape 2 chính là 132 features 
+
+# units: number of LSTM units, if 
+
+
+model = Sequential() # Stacked LSTM
+model.add(LSTM(units=50, return_sequences=True, input_shape=(X_train.shape[1], X_train.shape[2])))
+model.add(Dropout(0.2))
+model.add(LSTM(units=50, return_sequences=True))
+model.add(Dropout(0.2))
+model.add(LSTM(units=50, return_sequences=True))
+model.add(Dropout(0.2))
+model.add(LSTM(units=50))
+model.add(Dropout(0.2))
+model.add(Dense(units=1, activation='sigmoid')) 
+
+Chồng các timestep lên nhau
+Để tránh bị overfit 
