@@ -6,13 +6,23 @@ import pandas as pd
 # Read video from the default camera
 cap = cv2.VideoCapture(0)
 
+if (cap.isOpened() == False):
+  print("Error opening video stream or file")
+
+# set resolution, convert them from float to int
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+
+size = (frame_width, frame_height)
+video = cv2.VideoWriter('video.mp4', cv2.VideoWriter_fourcc(*'MP4V'), 10, size)
+
 # Initialize mediapipe lib
 mpPose = mp.solutions.pose
 pose = mpPose.Pose()
 mpDraw = mp.solutions.drawing_utils
 
 lm_list = []
-label = "BODYSWING"
+label = "SITTING"
 no_of_frames = 50
 
 def make_landmark_timestep(results):
@@ -51,6 +61,9 @@ while len(lm_list) <= no_of_frames:
       
       # Draw the landmarks on the frame
       frame = draw_landmark_on_image(mpDraw, results, frame)
+      
+      # write the frame to video 
+      video.write(frame)
     
     cv2.imshow('frame', frame)
     if cv2.waitKey(1) == ord('q'):
@@ -63,4 +76,5 @@ df.to_csv(label + '.csv')
 
 
 cap.release()
+video.release()
 cv2.destroyAllWindows()

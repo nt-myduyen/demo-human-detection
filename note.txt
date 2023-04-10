@@ -35,3 +35,40 @@ model.add(Dense(units=1, activation='sigmoid'))
 
 Chồng các timestep lên nhau
 Để tránh bị overfit 
+
+--------------------
+Data -> Model -> App/Web  
+### Data: collect: - online   
+
+## Check some methods has the pretrain 
+
+classes -> sample -> định dạng ảnh png/jpg,.. -> size 
+-> Aim: các ảnh được chụp có được sự đồng đều về kích thước, samples nên để số lượng như nhau. 
+-> thu thập dữ liệu -> làm giàu dữ liệu 
++ resize
++ standalize
+
+* Img: -----> Output: label | accuracy
+  img: --> features --> | Mô hình ML: tự trích xuất đặc trưng
+                        | Mô hình Deep Learning: hắn tự trích xuất đặc trưng cho mình, không cần quan tâm đến features
+                        mediapise -> 33 points pose | --> qua model phân loại Classifications  --> Nhận diện
+
+  Dữ liệu: setup chụp tự động bằng jetson nano là có dữ liệu nè. 
+
+Model: 
+- CÓ những mô hình như nào rồi
+- Cách đặt camera như nào nè...
+- 
+
+VD có 2 folder: có 100 ảnh té ngã, 100 ảnh others -> chyaj 200 lần -> qua mediapise -> 200 vectors: 33points
+              --> 2 folders: 100 vectors contain the label to detect 
+              --> Đây là dữ liệu cuối cùng để mình huấn luyện
+
+Có dữ liệu -> Đưa vào mô hình để huấn luyện (chỉ cần gọi hàm trong thư viện skilearn)
+-> Lập bảng so sánh đối với phương pháp nào thì cho kết quả ntn:
+  + Đưa ra bộ metrics đánh giá: acc | loss | confussion matrix 
+
+------- 
+Đi qua mô hình thuật toán để ra model -> đưa ra kết quả lên web nè. 
+--------------------------
+Since you have 120 frames per video, you could try using a timestep of 10, which means each sequence would contain 10 frames. This would give you 12 sequences per video, and if you have 10 videos per CSV file, you would have a total of 120 sequences in each CSV file.
